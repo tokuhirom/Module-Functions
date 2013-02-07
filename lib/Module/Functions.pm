@@ -2,9 +2,27 @@ package Module::Functions;
 use strict;
 use warnings;
 use 5.008005;
-our $VERSION = '0.0.1';
+our $VERSION = '1.0.0';
 
+use parent qw/Exporter/;
 
+use Sub::Identify ();
+
+our @EXPORT = qw(get_public_functions);
+
+sub get_public_functions {
+    my $klass = shift || caller(0);
+    my @functions;
+    no strict 'refs';
+    while (my ($k, $v) = each %{"${klass}::"}) {
+        next if $k =~ /^(?:BEGIN|CHECK|END)$/;
+        next if $k =~ /^_/;
+        next unless *{"${klass}::${k}"}{CODE};
+        next if $klass ne Sub::Identify::stash_name( $klass->can($k) );
+        push @functions, $k;
+    }
+    return @functions;
+}
 
 1;
 __END__
@@ -13,23 +31,53 @@ __END__
 
 =head1 NAME
 
-Module::Functions - ...
+Module::Functions - Get function list from package.
 
 =head1 SYNOPSIS
 
-  use Module::Functions;
+    package My::Class;
+    use parent qw/Exporter/;
+    use Module::Functions;
+    our @EXPORT = get_public_functions();
 
 =head1 DESCRIPTION
 
-Module::Functions is
+Module::Functions is a library to get a public functions list from package.
+It is useful to create a exportable function list.
 
-B<THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE>.
+=head1 METHODS
+
+=over 4
+
+=item my @functions = get_public_functions()
+
+=item my @functions = get_public_functions($package)
+
+Get a public function list from the package.
+
+If you don't pass the C<< $package >> parameter, the function use C<< caller(0) >> as a source package.
+
+This function does not get a function, that imported from other package.
+
+For example:
+
+    package Foo;
+    use File::Spec::Functions qw/catfile/;
+    sub foo { }
+
+In this case, ceturn value of C<< get_public_functions('Foo') >> does not contain 'catfile'. Return value is C<< ('foo') >>.
+
+=back
 
 =head1 AUTHOR
 
 Tokuhiro Matsuno E<lt>tokuhirom AAJKLFJEF@ GMAIL COME<gt>
 
 =head1 SEE ALSO
+
+L<Exporter::Auto> have same feature of this module, but it stands on very tricky thing.
+
+L<Class::Inspector> finds the function list. But it does not check the function defined at here or imported from other package.
 
 =head1 LICENSE
 
