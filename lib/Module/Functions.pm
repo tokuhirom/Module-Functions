@@ -2,7 +2,7 @@ package Module::Functions;
 use strict;
 use warnings;
 use 5.008005;
-our $VERSION = '1.0.0';
+our $VERSION = '2.0.0';
 
 use parent qw/Exporter/;
 
@@ -15,7 +15,7 @@ sub get_public_functions {
     my @functions;
     no strict 'refs';
     while (my ($k, $v) = each %{"${klass}::"}) {
-        next if $k =~ /^(?:BEGIN|CHECK|END)$/;
+        next if $k =~ /^(?:BEGIN|UNITCHECK|INIT|CHECK|END|import)$/;
         next if $k =~ /^_/;
         next unless *{"${klass}::${k}"}{CODE};
         next if $klass ne Sub::Identify::stash_name( $klass->can($k) );
@@ -65,7 +65,23 @@ For example:
     use File::Spec::Functions qw/catfile/;
     sub foo { }
 
-In this case, ceturn value of C<< get_public_functions('Foo') >> does not contain 'catfile'. Return value is C<< ('foo') >>.
+In this case, return value of C<< get_public_functions('Foo') >> does not contain 'catfile'. Return value is C<< ('foo') >>.
+
+=back
+
+=head1 RULES
+
+This module remove some function names.
+
+Rules are here:
+
+=over 4
+
+=item BEGIN, UNITCHECK, CHECK, INIT, and END are hidden.
+
+=item 'import' method is hidden
+
+=item function name prefixed by '_' is hidden.
 
 =back
 

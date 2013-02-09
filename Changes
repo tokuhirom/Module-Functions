@@ -1,4 +1,9 @@
 Revision history for Perl extension Module::Functions
 
+2.0.0 2013-02-09T12:54:37
+
+    - better docs
+    - hide INIT,UNITCHECK,import from public methods.
+
 1.0.0 2013-02-07T13:42:10
     - original version
