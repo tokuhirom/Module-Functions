@@ -9,6 +9,7 @@ use parent qw/Exporter/;
 use Sub::Identify ();
 
 our @EXPORT = qw(get_public_functions);
+our @EXPORT_OK = qw(get_full_functions);
 
 sub get_public_functions {
     my $klass = shift || caller(0);
@@ -19,6 +20,16 @@ sub get_public_functions {
         next if $k =~ /^_/;
         next unless *{"${klass}::${k}"}{CODE};
         next if $klass ne Sub::Identify::stash_name( $klass->can($k) );
+        push @functions, $k;
+    }
+    return @functions;
+}
+
+sub get_full_functions {
+    my $klass = shift || caller(0);
+    my @functions;
+    no strict 'refs';
+    while (my ($k, $v) = each %{"${klass}::"}) {
         push @functions, $k;
     }
     return @functions;
