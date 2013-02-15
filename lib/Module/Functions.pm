@@ -27,12 +27,8 @@ sub get_public_functions {
 
 sub get_full_functions {
     my $klass = shift || caller(0);
-    my @functions;
     no strict 'refs';
-    while (my ($k, $v) = each %{"${klass}::"}) {
-        push @functions, $k;
-    }
-    return @functions;
+    return keys %{"${klass}::"};
 }
 
 1;
@@ -58,11 +54,9 @@ It is useful to create a exportable function list.
 
 =head1 METHODS
 
-=over 4
+=head2 my @functions = get_public_functions()
 
-=item my @functions = get_public_functions()
-
-=item my @functions = get_public_functions($package)
+=head2 my @functions = get_public_functions($package)
 
 Get a public function list from the package.
 
@@ -78,11 +72,9 @@ For example:
 
 In this case, return value of C<< get_public_functions('Foo') >> does not contain 'catfile'. Return value is C<< ('foo') >>.
 
-=back
+=head3 RULES
 
-=head1 RULES
-
-This module remove some function names.
+This C<< get_public_functions >> removes some function names.
 
 Rules are here:
 
@@ -95,6 +87,15 @@ Rules are here:
 =item function name prefixed by '_' is hidden.
 
 =back
+
+=head2 my @functions = get_full_functions();
+
+=head2 my @functions = get_full_functions($package)
+
+This function get ALL functions.
+ALL means functions that were imported from other packages.
+And included specially named functions(BEGIN , UNITCHECK , CHECK , INIT and END).
+Of course, included also private functions( ex. _foo ).
 
 =head1 AUTHOR
 
