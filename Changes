@@ -1,5 +1,10 @@
 Revision history for Perl extension Module::Functions
 
+2.1.0 2013-02-16T11:37:28
+
+    - Added get_full_functions()
+      (bayashi)
+
 2.0.0 2013-02-09T12:54:37
 
     - better docs

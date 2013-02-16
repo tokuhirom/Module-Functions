@@ -9,6 +9,8 @@ META.yml
 README
 t/00_compile.t
 t/01_simple.t
+t/02_full_functions.t
+t/lib/Bar.pm
 t/lib/Foo.pm
 xt/01_podspell.t
 xt/02_perlcritic.t

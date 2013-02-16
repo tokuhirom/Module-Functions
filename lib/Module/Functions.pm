@@ -2,7 +2,7 @@ package Module::Functions;
 use strict;
 use warnings;
 use 5.008005;
-our $VERSION = '2.0.0';
+our $VERSION = '2.1.0';
 
 use parent qw/Exporter/;
 
