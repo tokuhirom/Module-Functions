@@ -60,3 +60,5 @@ mysqldiff
 mmm
 JSON
 exportable
+INIT
+UNITCHECK
