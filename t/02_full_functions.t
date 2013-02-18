@@ -7,8 +7,8 @@ use Bar;
 use Module::Functions qw/get_full_functions/;
 
 is_deeply(
-    [ sort( get_full_functions('Bar') ) ],
-    [qw/BEGIN EXPORT ISA _barbar bar catfile import/]
+    [grep { $_ ne 'EXPORT_FAIL' } grep { $_ ne 'ISA' } sort( get_full_functions('Bar') ) ],
+    [qw/BEGIN EXPORT _barbar bar catfile import/]
 );
 
 done_testing;
