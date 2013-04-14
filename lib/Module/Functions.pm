@@ -15,7 +15,8 @@ sub get_public_functions {
     my $klass = shift || caller(0);
     my @functions;
     no strict 'refs';
-    while (my ($k, $v) = each %{"${klass}::"}) {
+    my %class = %{"${klass}::"};
+    while (my ($k, $v) = each %class) {
         next if $k =~ /^(?:BEGIN|UNITCHECK|INIT|CHECK|END|import)$/;
         next if $k =~ /^_/;
         next unless *{"${klass}::${k}"}{CODE};
