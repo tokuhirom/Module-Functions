@@ -2,6 +2,11 @@ Revision history for Perl extension Module::Functions
 
 {{$NEXT}}
 
+2.1.2 2013-04-14T02:38:16Z
+
+    - fixed to "Use of each() on hash after insertion without resetting hash iterator results in undefined behavior" on 5.17.10
+      (Yappo++)
+
 2.1.1 2013-02-18T11:34:47
 
     - fixed test protability
