@@ -1,5 +1,7 @@
 Revision history for Perl extension Module::Functions
 
+{{$NEXT}}
+
 2.1.1 2013-02-18T11:34:47
 
     - fixed test protability
