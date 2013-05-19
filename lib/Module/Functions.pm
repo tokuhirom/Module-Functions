@@ -2,7 +2,7 @@ package Module::Functions;
 use strict;
 use warnings;
 use 5.008005;
-our $VERSION = '2.1.2';
+our $VERSION = '2.1.3';
 
 use parent qw/Exporter/;
 
@@ -36,6 +36,8 @@ sub get_full_functions {
 __END__
 
 =encoding utf8
+
+=for stopwords catfile
 
 =head1 NAME
 
