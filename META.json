@@ -4,7 +4,7 @@
       "Tokuhiro Matsuno <tokuhirom AAJKLFJEF@ GMAIL COM>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.0.53, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Minilla/v0.4.3, CPAN::Meta::Converter version 2.130880",
    "license" : [
       "perl_5"
    ],
@@ -34,17 +34,16 @@
       },
       "develop" : {
          "requires" : {
-            "Pod::Wordlist::hanekomu" : "0",
             "Test::CPAN::Meta" : "0",
             "Test::MinimumVersion" : "0.10108",
             "Test::Pod" : "1.41",
-            "Test::Spelling" : "0"
+            "Test::Spellunker" : "v0.2.2"
          }
       },
       "runtime" : {
          "requires" : {
             "Exporter" : "0",
-            "Sub::Identify" : "0",
+            "Sub::Identify" : "0.04",
             "parent" : "0",
             "perl" : "5.008005"
          }

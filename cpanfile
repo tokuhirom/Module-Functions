@@ -1,5 +1,5 @@
 requires 'Exporter';
-requires 'Sub::Identify';
+requires 'Sub::Identify', 0.04;
 requires 'parent';
 requires 'perl', '5.008005';
 
